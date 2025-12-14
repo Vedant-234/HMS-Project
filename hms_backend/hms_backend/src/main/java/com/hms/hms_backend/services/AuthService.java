@@ -9,4 +9,5 @@ public interface AuthService {
     AuthResponse login(LoginRequest request);
 
     AuthResponse registerPatient(RegisterPatientRequest request);
+
 }

@@ -1,16 +1,14 @@
 package com.hms.hms_backend.servicesImpl;
 
-
+import com.hms.hms_backend.daos.PatientDao;
+import com.hms.hms_backend.daos.UserAccountDao;
 import com.hms.hms_backend.dtos.request.LoginRequest;
 import com.hms.hms_backend.dtos.request.RegisterPatientRequest;
 import com.hms.hms_backend.dtos.response.AuthResponse;
-import com.hms.hms_backend.entities.Patient;
-import com.hms.hms_backend.entities.UserAccount;
-import com.hms.hms_backend.entities.UserRole;
-import com.hms.hms_backend.daos.PatientDao;
-import com.hms.hms_backend.daos.UserAccountDao;
+import com.hms.hms_backend.entities.*;
 import com.hms.hms_backend.security.JwtTokenUtil;
 import com.hms.hms_backend.services.AuthService;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +24,7 @@ public class AuthServiceImpl implements AuthService {
                            PatientDao patientDao,
                            PasswordEncoder passwordEncoder,
                            JwtTokenUtil jwtUtil) {
+
         this.userAccountDao = userAccountDao;
         this.patientDao = patientDao;
         this.passwordEncoder = passwordEncoder;
@@ -44,11 +43,10 @@ public class AuthServiceImpl implements AuthService {
         }
 
         String token = jwtUtil.generateToken(user.getEmail(), user.getRole().name());
-
         return new AuthResponse(token, user.getRole().name());
     }
 
-    // 🧑‍⚕️ REGISTER (ONLY PATIENT)
+    // 🧑‍⚕️ REGISTER PATIENT
     @Override
     public AuthResponse registerPatient(RegisterPatientRequest request) {
 
@@ -56,7 +54,6 @@ public class AuthServiceImpl implements AuthService {
         user.setEmail(request.getEmail());
         user.setPasswordHash(passwordEncoder.encode(request.getPassword()));
         user.setRole(UserRole.PATIENT);
-
         user = userAccountDao.save(user);
 
         Patient patient = new Patient();
@@ -71,7 +68,8 @@ public class AuthServiceImpl implements AuthService {
         patientDao.save(patient);
 
         String token = jwtUtil.generateToken(user.getEmail(), user.getRole().name());
-
         return new AuthResponse(token, user.getRole().name());
     }
+
+
 }

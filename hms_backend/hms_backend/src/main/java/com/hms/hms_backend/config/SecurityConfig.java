@@ -23,6 +23,7 @@ public class SecurityConfig {
 
                 // ✅ Authorization rules
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/manager/**").hasRole("MANAGER")
                         .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().authenticated()
                 );
