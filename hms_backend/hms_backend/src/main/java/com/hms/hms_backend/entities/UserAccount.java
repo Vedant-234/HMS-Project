@@ -14,9 +14,7 @@ import java.time.LocalDateTime;
 @Table(
         name="user_account",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "username"),
-                @UniqueConstraint(columnNames = "email"),
-                @UniqueConstraint(columnNames = "mobile")
+                @UniqueConstraint(columnNames = "email")
         }
 )
 public class UserAccount {
@@ -24,15 +22,11 @@ public class UserAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userid;
     @Column(nullable = false, length = 100, unique = true)
-    private String username;
-    @Column(nullable = false, name = "password_hash", length = 255)
     private String passwordHash;
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private UserRole role;
-    @Column(length = 10, unique = true)
-    private String mobile;
-    @Column(length = 150, unique = true)
+    @Column(length = 150, unique = true, nullable = false)
     private String email;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -42,6 +36,12 @@ public class UserAccount {
     @PrePersist
     protected void onCreate() {
         LocalDateTime now = LocalDateTime.now();
-        this.createdAt
+        this.createdAt = now;
+        this.updatedAt = now;
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
     }
 }

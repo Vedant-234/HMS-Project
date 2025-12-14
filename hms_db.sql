@@ -5,10 +5,8 @@ USE hms_db;
 -- 1) user_account
 CREATE TABLE user_account (
   userid INT AUTO_INCREMENT PRIMARY KEY,
-  username VARCHAR(100) NOT NULL UNIQUE,
   password_hash VARCHAR(255) NOT NULL,
   role ENUM('manager','doctor','patient') NOT NULL,
-  mobile VARCHAR(20),
   email VARCHAR(150),
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -20,7 +18,6 @@ CREATE TABLE manager (
   managerid INT AUTO_INCREMENT PRIMARY KEY,
   userid INT NOT NULL UNIQUE,
   name VARCHAR(150) NOT NULL,
-  email VARCHAR(150) NOT NULL UNIQUE,
   mobile VARCHAR(20),
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (userid) REFERENCES user_account(userid)
@@ -31,16 +28,18 @@ CREATE TABLE manager (
 CREATE TABLE doctor (
   doctorid INT AUTO_INCREMENT PRIMARY KEY,
   userid INT NOT NULL UNIQUE,
+  managerid INT,
   name VARCHAR(150) NOT NULL,
   gender VARCHAR(20),
   speciality VARCHAR(150) NOT NULL,
-  email VARCHAR(150) NOT NULL UNIQUE,
   mobile VARCHAR(20),
   image VARCHAR(255),
   status ENUM('active','retired','left','holiday') NOT NULL DEFAULT 'active',
   consultation_duration INT NOT NULL DEFAULT 30,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (userid) REFERENCES user_account(userid)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (managerid) REFERENCES manager(managerid)
     ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT chk_consultation_duration_positive CHECK (consultation_duration > 0)
 );
@@ -49,18 +48,20 @@ CREATE TABLE doctor (
 CREATE TABLE patient (
   patientid INT AUTO_INCREMENT PRIMARY KEY,
   userid INT NOT NULL UNIQUE,
+  managerid INT,
   firstname VARCHAR(100) NOT NULL,
   lastname VARCHAR(100) NOT NULL,
   gender VARCHAR(20),
   dateofbirth DATE,
   mobile VARCHAR(20),
-  email VARCHAR(150),
   address VARCHAR(255),
   image VARCHAR(255),
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (userid) REFERENCES user_account(userid)
     ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT ux_patient_contact UNIQUE (email, mobile)
+  FOREIGN KEY (managerid) REFERENCES manager(managerid)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT ux_patient_contact UNIQUE (mobile)
 );
 
 -- 5) medicine_record
@@ -72,7 +73,7 @@ CREATE TABLE medicine_record (
   quantity INT NOT NULL DEFAULT 0,
   expiry_date DATE,
   price DECIMAL(10,2) NOT NULL DEFAULT 0.00,
-  managerid INT NULL,
+  managerid INT,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   modified_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (managerid) REFERENCES manager(managerid) ON DELETE SET NULL,
