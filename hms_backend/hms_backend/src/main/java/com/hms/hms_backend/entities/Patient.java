@@ -30,7 +30,7 @@ public class Patient {
 
     // 🔗 Assigned by manager later (many patients → one manager)
     @ManyToOne
-    @JoinColumn(name = "managerid")
+    @JoinColumn(name = "managerid",nullable = false)
     private Manager manager;
 
     @Column(nullable = false, length = 100)

@@ -3,10 +3,11 @@ package com.hms.hms_backend.dtos.request;
 import lombok.Data;
 
 @Data
-public class DoctorRequest {
+public class RegisterDoctorRequest {
     private String name;
     private String speciality;
     private String mobile;
+    private int consultationDuration;
     private String email;
     private String password;   // doctor login password
 }

@@ -1,12 +1,11 @@
 package com.hms.hms_backend.controllers;
 
-import com.hms.hms_backend.dtos.request.DoctorRequest;
+import com.hms.hms_backend.dtos.request.RegisterDoctorRequest;
 import com.hms.hms_backend.dtos.request.LoginRequest;
 import com.hms.hms_backend.dtos.request.RegisterPatientRequest;
 import com.hms.hms_backend.dtos.response.AuthResponse;
 import com.hms.hms_backend.entities.Doctor;
 import com.hms.hms_backend.services.AuthService;
-import com.hms.hms_backend.services.DoctorService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +16,9 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthService authService;
-    private final DoctorService doctorService;
 
-    public AuthController(AuthService authService, DoctorService doctorService) {
+    public AuthController(AuthService authService) {
         this.authService = authService;
-        this.doctorService = doctorService;
     }
 
     // 🔐 LOGIN (ALL)
@@ -37,11 +34,11 @@ public class AuthController {
         return ResponseEntity.ok(authService.registerPatient(request));
     }
 
-    @PostMapping("/create-doctor")
-    @PreAuthorize("hasRole('MANAGER')")
-    public ResponseEntity<?> createDoctor(@RequestBody DoctorRequest request) {
-        Doctor doctor = doctorService.createDoctor(request);
-        return ResponseEntity.ok(doctor);
+    @PostMapping("/register/doctor/{managerId}")
+    public ResponseEntity<AuthResponse> registerDoctor(@PathVariable int managerId,@RequestBody RegisterDoctorRequest request) {
+        return ResponseEntity.ok(authService.registerDoctor(request,managerId));
     }
+
+
 
 }
