@@ -1,0 +1,114 @@
+.sidebar-green {
+  height: 100vh;
+  padding: 18px 12px;
+  background: linear-gradient(180deg, #0f9d58, #198754);
+  color: white;
+}
+
+/* menu container */
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Normal link */
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  text-decoration: none !important;
+  color: white !important;
+  font-weight: 600;
+  transition: 0.3s;
+  background: rgba(255, 255, 255, 0.12);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateX(5px);
+}
+
+.sidebar-link.active {
+  background: white;
+  color: #198754 !important;
+  font-weight: 700;
+}
+
+/* Dropdown Button */
+.sidebar-dropdown-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: white !important;
+  font-weight: 600;
+  transition: 0.3s;
+  cursor: pointer;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-dropdown-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateX(5px);
+}
+
+.dropdown-arrow {
+  margin-left: auto;
+  font-size: 12px;
+}
+
+/* Submenu links */
+.sidebar-submenu {
+  margin-top: 8px;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-sublink {
+  padding: 10px 14px;
+  border-radius: 12px;
+  text-decoration: none !important;
+  color: white !important;
+  font-size: 14px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.09);
+  transition: 0.25s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-sublink:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.sidebar-sublink.active {
+  background: white;
+  color: #198754 !important;
+  font-weight: 700;
+}
+
+.sidebar-icon {
+  font-size: 18px;
+}
+
+
