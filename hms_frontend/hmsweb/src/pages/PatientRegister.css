@@ -1,0 +1,88 @@
+.rp-container {
+  background: #f4fbf8;
+  min-height: 100vh;
+  padding: 30px;
+}
+
+.rp-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 1000px;
+  margin: auto;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.rp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rp-header h4 {
+  font-weight: 700;
+}
+
+.rp-plus {
+  color: #7c4dff;
+  font-size: 20px;
+  margin-right: 6px;
+}
+
+.rp-header p {
+  margin: 0;
+  color: #6b7280;
+}
+
+.rp-badge {
+  background: #e6f7f1;
+  color: #1e8e5a;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+label {
+  font-weight: 600;
+}
+
+small {
+  color: #6b7280;
+}
+
+.password-box {
+  position: relative;
+}
+
+.show-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.rp-tip {
+  background: #e0f7fa;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 14px;
+}
+
+.rp-login-text {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.rp-login-link {
+  color: #198754;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.rp-login-link:hover {
+  text-decoration: underline;
+}

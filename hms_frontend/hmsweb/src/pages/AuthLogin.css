@@ -1,0 +1,87 @@
+/* Page background */
+.auth-container {
+  min-height: 100vh;
+  background-color: #f3fbf8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+}
+
+/* Back link */
+.back-link {
+  width: 100%;
+  max-width: 420px;
+  font-size: 14px;
+  color: #3f5f55;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+/* Card */
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(43, 182, 115, 0.15);
+}
+
+/* Top Icon (Hospital Green) */
+.auth-icon {
+  width: 64px;
+  height: 64px;
+  background-color: #2bb673;
+  color: white;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  margin: auto;
+}
+
+/* Headings */
+.auth-card h4 {
+  color: #1e8e5a;
+}
+
+.auth-card p {
+  color: #4b6f63;
+}
+
+/* Inputs */
+.input-group-text {
+  background-color: #e6f7f1;
+  border-right: none;
+  color: #2bb673;
+}
+
+.form-control {
+  border-left: none;
+  height: 48px;
+}
+
+.form-control::placeholder {
+  color: #8aa8a0;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #2bb673;
+}
+
+/* Green Sign In Button */
+.btn-primary {
+  background-color: #2bb673;
+  border-color: #2bb673;
+  height: 48px;
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  background-color: #1e8e5a;
+  border-color: #1e8e5a;
+}
+
